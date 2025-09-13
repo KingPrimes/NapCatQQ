@@ -137,7 +137,7 @@ jobs:
       run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
       
     - name: Clone Changes Log
-      run: curl -o CHANGELOG.md https://fastly.jsdelivr.net/gh/NapNeko/NapCatQQ@main/docs/changelogs/CHANGELOG.v${{ env.VERSION }}.md
+      run: curl -o CHANGELOG.md https://fastly.jsdelivr.net/gh/KingPrimes/NapCatQQ@main/docs/changelogs/CHANGELOG.v${{ env.VERSION }}.md
         
     - name: Create Release Draft and Upload Artifacts
       uses: softprops/action-gh-release@v1
@@ -151,14 +151,14 @@ jobs:
           NapCat.Framework.Windows.Once.zip
         draft: true
 
-  build-docker:
-    needs: release-napcat
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dispatch Docker Build
-        run: |
-          curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.NAPCAT_BUILD }}" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/NapNeko/NapCat-Docker/actions/workflows/docker-publish.yml/dispatches \
-          -d '{"ref": "main"}'
+#  build-docker:
+#    needs: release-napcat
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Dispatch Docker Build
+#        run: |
+#          curl -X POST \
+#          -H "Authorization: Bearer ${{ secrets.NAPCAT_BUILD }}" \
+#          -H "Accept: application/vnd.github.v3+json" \
+#          https://api.github.com/repos/KingPrimes/NapCat-Docker/actions/workflows/docker-publish.yml/dispatches \
+#          -d '{"ref": "main"}'
